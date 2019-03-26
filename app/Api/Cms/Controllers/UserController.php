@@ -24,7 +24,7 @@ class UserController extends Controller
         # code...
     }
     //修改密码
-    public function change_password()
+    public function changePassword()
     {
         # code...
     }
