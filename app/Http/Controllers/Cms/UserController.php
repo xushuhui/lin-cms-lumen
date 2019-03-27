@@ -1,7 +1,7 @@
 <?php
 
-namespaceApp\Http\Controller\Cms;
-
+namespace App\Http\Controllers\Cms;
+use App\Http\Controllers\Controller;
 class UserController extends Controller
 {
     public function __construct()
@@ -14,9 +14,12 @@ class UserController extends Controller
         return "rests";
     }
     //登录
-    public function login()
+    public function login($nickname,$password)
     {
-        # code...
+        return [
+            'access_token' => 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9',
+            'refresh_token' => 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9'
+        ];
     }
     //更新用户信息
     public function update()
@@ -38,9 +41,21 @@ class UserController extends Controller
     {
         # code...
     }
-    //查询自己拥有的权限
+    //查询自己拥有的权限 验证token
     public function auths()
     {
-        # code...
+        return [
+            'id'=> 1,
+            'active' => 1,
+            'auths' => [],
+            'create_time' => 1546339219000,
+            'delete_time'=> null,
+            'email' => '12345678@qq.com',
+            'group_id'=> null,
+            'nickname' => 'super',
+            'super' => 2,
+            'update_time'=> '2019-03-18T10:21:58Z'
+        ];
+
     }
 }

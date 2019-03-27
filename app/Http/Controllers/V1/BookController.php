@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controller\V1;
+namespace App\Http\Controllers\V1;
 
 class BookController  
 {

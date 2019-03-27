@@ -1,6 +1,6 @@
 <?php
 
-namespaceApp\Http\Controller\Cms;
+namespace App\Http\Controllers\Cms;
 
 class LogController  
 {

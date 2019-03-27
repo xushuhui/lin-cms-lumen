@@ -1,5 +1,5 @@
 <?php
-namespace App\Http\Controller\Cms;
+namespace App\Http\Controllers\Cms;
 
 class AdminController  
 {

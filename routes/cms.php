@@ -1,7 +1,6 @@
 <?php
 
-$router->group(['prefix' => 'cms'], function () use ($router) {
-    $router->get('user/login', function ()    {
-        return 'user/login';
-    });
+$router->group(['prefix' => 'cms','namespace' => '\App\Http\Controllers\Cms'], function () use ($router) {
+    $router->post('user/login', 'UserController@login');
+    $router->get('user/auths', 'UserController@auths');
 });
