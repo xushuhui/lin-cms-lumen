@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers\V1;
 
+use App\Requests\Book\CreateBookRequest;
+use Illuminate\Http\Request;
+
+
 class BookController
 {
     public function getBooks()
@@ -38,8 +42,11 @@ class BookController
         ];
     }
 
-    public function createBook()
+    public function createBook(Request $request)
     {
+        $tes = new CreateBookRequest();
+        dump($tes->validates($request->all()));
+        //dump($request->all());
         return [
             "error_code" => 0,
             "msg"        => "新建图书成功",
