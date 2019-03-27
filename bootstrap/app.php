@@ -96,6 +96,7 @@ $app->router->group([
 ], function ($router) {
     require __DIR__.'/../routes/web.php';
     require __DIR__.'/../routes/cms.php';
+    require __DIR__.'/../routes/v1.php';
 });
 
 return $app;
