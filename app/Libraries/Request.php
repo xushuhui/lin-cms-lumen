@@ -13,20 +13,21 @@ use Illuminate\Support\Facades\Validator;
 class Request
 {
     public $rules;
+    public $msg;
     public function validates($data)
     {
         $validator =  Validator::make($data,$this->rules);
         if ($validator->fails()) {
             $msg = $validator->errors()->all();
-            $msg = is_array($msg) ? implode(' ', $msg) :$msg;
-            return self::getLastError($msg);
+            $this->msg = is_array($msg) ? implode(' ', $msg) :$msg;
+            return false;
         }
         return true;
     }
-    public  function getLastError($msg)
+    public  function getLastError()
     {
         $result = new Response();
-        $result->setResult(ErrorCodeTable::CODE_INVALID_PARAMS,$msg);
+        $result->setResult(ErrorCodeTable::CODE_INVALID_PARAMS,$this->msg);
         return $result->toArray();
     }
 

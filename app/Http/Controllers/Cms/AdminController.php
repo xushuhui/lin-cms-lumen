@@ -6,12 +6,11 @@ class AdminController
     //查询所有可分配的权限
     public function authority()
     {
-        # code...
+
     }
     //查询所有用户
     public function getAdminUsers()
     {
-        # code...
     }
     //修改用户密码
     public function changeUserPassword()

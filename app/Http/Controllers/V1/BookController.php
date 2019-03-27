@@ -12,6 +12,7 @@ class BookController
     public function __construct()
     {
         $this->result = new Response();
+        $this->request = new Request();
     }
     public function getBooks()
     {
@@ -48,10 +49,17 @@ class BookController
         ];
     }
 
-    public function createBook(Request $request)
+    public function createBook(CreateBookRequest $request)
     {
-        $tes = new CreateBookRequest();
-        dump($tes->validates($request->all()));
+        $info = new CreateBookRequest();
+        if($request->validates($this->request->all())){
+            $result = $request->load($this->request->all());
+
+        }else{
+            $result =  $request->getLastError();
+        }
+        return $result;
+
         //dump($request->all());
         return [
             "error_code" => 0,
