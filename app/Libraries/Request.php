@@ -1,5 +1,5 @@
 <?php
-namespace App\Requests;
+namespace App\Libraries;
 
 
 use Illuminate\Support\Facades\Validator;
@@ -18,15 +18,17 @@ class Request
         $validator =  Validator::make($data,$this->rules);
         if ($validator->fails()) {
             $msg = $validator->errors()->all();
-//            throw new BaseExcetion([
-//                'msg' => is_array($msg) ? implode(' ', $msg) :$msg
-//            ]);
-            dump($msg);
+            $msg = is_array($msg) ? implode(' ', $msg) :$msg;
+            return self::getLastError($msg);
         }
-
-        return [
-            //
-        ];
+        return true;
     }
+    public  function getLastError($msg)
+    {
+        $result = new Response();
+        $result->setResult(ErrorCodeTable::CODE_INVALID_PARAMS,$msg);
+        return $result->toArray();
+    }
+
 
 }

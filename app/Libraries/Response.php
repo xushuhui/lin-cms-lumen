@@ -51,4 +51,12 @@ class Response
     {
         return $this->error_code === ErrorCodeTable::CODE_OK;
     }
+    public function toArray()
+    {
+        return [
+            'error_code'=>$this->error_code,
+            'msg'=>$this->msg,
+            'data'=>$this->data
+        ];
+    }
 }
