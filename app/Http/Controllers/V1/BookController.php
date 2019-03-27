@@ -4,10 +4,14 @@ namespace App\Http\Controllers\V1;
 
 use App\Requests\Book\CreateBookRequest;
 use Illuminate\Http\Request;
-
+use App\Libraries\Response;
 
 class BookController
 {
+    public function __construct()
+    {
+        $this->result = new Response();
+    }
     public function getBooks()
     {
         return [
