@@ -16,9 +16,9 @@ class CreateLinLogTable extends Migration
         Schema::create('lin_log', function (Blueprint $table) {
             $table->increments('id');
             $table->string('message',250);
-            $table->integer('user_id', 11);
+            $table->integer('user_id');
             $table->string('user_name',20);
-            $table->integer('status_code',11);
+            $table->integer('status_code');
             $table->string('method',20);
             $table->string('path',50);
             $table->string('authority',100);

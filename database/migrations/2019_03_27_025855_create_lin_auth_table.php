@@ -15,7 +15,7 @@ class CreateLinAuthTable extends Migration
     {
         Schema::create('lin_auth', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('group_id',11);
+            $table->integer('group_id');
             $table->string('auth',60);
             $table->string('module',50);
         });

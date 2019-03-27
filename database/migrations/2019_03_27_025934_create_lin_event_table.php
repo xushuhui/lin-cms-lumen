@@ -15,7 +15,7 @@ class CreateLinEventTable extends Migration
     {
         Schema::create('lin_event', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('group_id',11);
+            $table->integer('group_id');
             $table->string('message_events',250);
         });
     }

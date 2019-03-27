@@ -17,9 +17,9 @@ class CreateLinUserTable extends Migration
             $table->increments('id');
             $table->string('nickname', 24);
             $table->string('password', 32);
-            $table->smallInteger('super', 6);
-            $table->smallInteger('active', 6);
-            $table->integer('group_id', 11);
+            $table->smallInteger('super');
+            $table->smallInteger('active');
+            $table->integer('group_id');
             $table->string('email', 100);
             $table->timestamps();
             $table->softDeletes();
