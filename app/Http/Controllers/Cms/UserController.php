@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Api\Cms\Controllers;
+namespaceApp\Http\Controller\Cms;
 
 class UserController extends Controller
 {
