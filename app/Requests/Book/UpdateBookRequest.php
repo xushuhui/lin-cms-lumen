@@ -9,7 +9,7 @@ use App\Libraries\RequestValidate;
  * Date: 2019/3/27
  * Time: 11:55
  */
-class CreateBookRequest extends RequestValidate
+class UpdateBookRequest extends RequestValidate
 {
     public $title;
     public $author;

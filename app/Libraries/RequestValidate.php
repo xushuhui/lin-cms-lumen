@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Validator;
  * Time: 12:41
  */
 
-class Request
+class RequestValidate
 {
     public $rules;
     public $msg;
@@ -30,6 +30,11 @@ class Request
         $result->setResult(ErrorCodeTable::CODE_INVALID_PARAMS,$this->msg);
         return $result->toArray();
     }
-
+    public  function error()
+    {
+        $result = new Response();
+        $result->fail(ErrorCodeTable::CODE_INVALID_PARAMS);
+        return $result->toArray();
+    }
 
 }

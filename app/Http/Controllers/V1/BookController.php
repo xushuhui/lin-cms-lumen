@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\V1;
 
-use App\Models\Book;
+use App\Libraries\RequestValidate;
 use App\Requests\Book\CreateBookRequest;
+use App\Requests\Book\UpdateBookRequest;
+use App\Services\BookService;
 use Illuminate\Http\Request;
 use App\Libraries\Response;
 
@@ -13,6 +15,7 @@ class BookController
     {
         $this->result = new Response();
         $this->request = new Request();
+        $this->service = new BookService();
     }
     public function getBooks()
     {
@@ -36,54 +39,54 @@ class BookController
         ];
     }
 
-    public function getBook($id)
+    public function getBook($id = 0)
     {
-        $data = Book::where('id',1)->get();
-        return [
-            "id"          => 1,
-            "author"      => "西藏城",
-            "create_time" => 1553587651000,
-            "image"       => "test",
-            "summary"     => "asf",
-            "title"       => "asf",
-        ];
+        if ($id == 0) {
+            $validate = new RequestValidate();
+            return $validate->error();
+        }
+        $result =  $this->service->getBook($id);
+        return $result;
+//        return [
+//            "id"          => 1,
+//            "author"      => "西藏城",
+//            "create_time" => 1553587651000,
+//            "image"       => "test",
+//            "summary"     => "asf",
+//            "title"       => "asf",
+//        ];
     }
 
     public function createBook(CreateBookRequest $request)
     {
-        $info = new CreateBookRequest();
         if($request->validates($this->request->all())){
-            $result = $request->load($this->request->all());
-
+            $info = $request->load($this->request->all());
+            $result =  $this->service->createBook($info);
         }else{
             $result =  $request->getLastError();
         }
         return $result;
-
-        //dump($request->all());
-        return [
-            "error_code" => 0,
-            "msg"        => "新建图书成功",
-            "request"    => "POST  /v1/book/",
-        ];
     }
 
-    public function updateBook($id)
+    public function updateBook(UpdateBookRequest $request)
     {
-        return [
-            "error_code" => 0,
-            "msg"        => "更新图书成功",
-            "request"    => "PUT  /v1/book/139",
-        ];
+        if($request->validates($this->request->all())){
+            $info = $request->load($this->request->all());
+            $result =  $this->service->updateBook($info);
+        }else{
+            $result =  $request->getLastError();
+        }
+        return $result;
     }
 
     public function deleteBook($id)
     {
-        return [
-            "error_code" => 0,
-            "msg"        => "删除图书成功",
-            "request"    => "DELETE  /v1/book/139",
-        ];
+        if ($id == 0) {
+            $validate = new RequestValidate();
+            return $validate->error();
+        }
+        $result =  $this->service->deleteBook($id);
+        return $result;
     }
 
     public function search()
