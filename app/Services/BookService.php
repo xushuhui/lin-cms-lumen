@@ -21,30 +21,34 @@ class BookService
     {
         $this->result = new Response();
     }
+
     public function createBook(CreateBookRequest $request)
     {
-        do{
-            $model = new Book();
-            $model->title = $request->title;
+        do {
+            $model          = new Book();
+            $model->title   = $request->title;
             $model->summary = $request->summary;
-            $model->author = $request->author;
-            $model->image = $request->image;
-            if(!$model->save()){
+            $model->author  = $request->author;
+            $model->image   = $request->image;
+            if (!$model->save()) {
                 $this->result->fail(ErrorCodeTable::CODE_SQL_ERROR);
                 break;
             };
             $this->result->succeed();
-        }while(false);
+        } while (false);
         return $this->result->toArray();
     }
+
     public function updateBook(UpdateBookRequest $request)
     {
         return $this->result->toArray();
     }
+
     public function deleteBook($id)
     {
         return $this->result->toArray();
     }
+
     public function getBook($id)
     {
         return $this->result->toArray();

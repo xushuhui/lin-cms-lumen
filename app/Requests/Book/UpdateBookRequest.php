@@ -28,6 +28,7 @@ class UpdateBookRequest extends RequestValidate
         $this->author  = $data['author'];
         $this->summary = $data['summary'];
         $this->image   = $data['image'];
+        return;
     }
 
 }
