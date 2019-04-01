@@ -76,10 +76,10 @@ $app->singleton(
 |
 */
 
-// $app->register(App\Providers\AppServiceProvider::class);
+$app->register(App\Providers\AppServiceProvider::class);
 $app->register(App\Providers\AuthServiceProvider::class);
 // $app->register(App\Providers\EventServiceProvider::class);
-
+$app->register(Tymon\JWTAuth\Providers\LumenServiceProvider::class);
 /*
 |--------------------------------------------------------------------------
 | Load The Application Routes
@@ -90,7 +90,7 @@ $app->register(App\Providers\AuthServiceProvider::class);
 | can respond to, as well as the controllers that may handle them.
 |
 */
-
+$app->configure('auth');
 $app->router->group([
     'namespace' => 'App\Http\Controllers',
 ], function ($router) {

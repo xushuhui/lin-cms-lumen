@@ -2,11 +2,16 @@
 
 namespace App\Http\Controllers\Cms;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use Tymon\JWTAuth\JWTAuth;
+
 class UserController extends Controller
 {
-    public function __construct()
+    protected $jwt;
+
+    public function __construct(JWTAuth $jwt)
     {
-        //
+        $this->jwt = $jwt;
     }
     //注册
     public function register()
@@ -14,12 +19,18 @@ class UserController extends Controller
         return "rests";
     }
     //登录
-    public function login($nickname,$password)
+    public function login(Request $request)
     {
-        return [
-            'access_token' => 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9',
-            'refresh_token' => 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9'
-        ];
+       
+        if (! $token = $this->jwt->attempt($request->only('nickname','password'))) {
+            return response()->json(['user_not_found'], 404);
+        }
+
+        return response()->json(compact('token'));
+//        return [
+//            'access_token' => 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9',
+//            'refresh_token' => 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9'
+//        ];
     }
     //更新用户信息
     public function update()

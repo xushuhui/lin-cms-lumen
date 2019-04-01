@@ -36,6 +36,7 @@ return [
 
     'guards' => [
         'api' => ['driver' => 'api'],
+        'provider' => 'users'
     ],
 
     /*
@@ -56,7 +57,10 @@ return [
     */
 
     'providers' => [
-        //
+        'users' => [
+            'driver' => 'eloquent',
+            'model'  => \App\Models\User::class,
+        ],
     ],
 
     /*
