@@ -16,7 +16,7 @@ class CreateLinUserTable extends Migration
         Schema::create('lin_user', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nickname', 24);
-            $table->string('password', 32);
+            $table->string('password', 60);
             $table->smallInteger('super');
             $table->smallInteger('active');
             $table->integer('group_id');
