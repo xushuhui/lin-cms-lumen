@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Cms;
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Tymon\JWTAuth\JWTAuth;
-
+use Illuminate\Support\Facades\Hash;
 class UserController extends Controller
 {
     protected $jwt;
@@ -21,12 +22,21 @@ class UserController extends Controller
     //登录
     public function login(Request $request)
     {
-       
+//        $password =  Hash::make(123456);
+//        $user = new User();
+//        $user->nickname = 'super';
+//        $user->password = $password;
+//        $user->save();
+//        User::create([
+//            'password' =>  $password,
+//            'nickname' => 'super',
+//
+//        ]);
         if (! $token = $this->jwt->attempt($request->only('nickname','password'))) {
             return response()->json(['user_not_found'], 404);
         }
-
-        return response()->json(compact('token'));
+//
+//        return response()->json(compact('token'));
 //        return [
 //            'access_token' => 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9',
 //            'refresh_token' => 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9'

@@ -12,7 +12,7 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
 class User extends Model implements AuthenticatableContract, AuthorizableContract,JWTSubject
 {
     use Authenticatable, Authorizable;
-
+    protected $table='lin_user';
     /**
      * The attributes that are mass assignable.
      *
