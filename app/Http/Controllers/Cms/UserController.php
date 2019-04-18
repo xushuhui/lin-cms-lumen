@@ -11,8 +11,13 @@ class UserController extends Controller
 {
 
     //注册
-    public function register()
+    public function register(Request $request)
     {
+        $user = new User();
+        $user->nickname = $request->post('nickname');
+        $user->password = Hash::make($request->input('password'));
+        
+        $user->save();
         return "rests";
     }
     //登录
@@ -75,6 +80,7 @@ class UserController extends Controller
             'expires_in' => JWTAuth::factory()->getTTL() * 60,
         ]);
     }
+    
     /**
      * 获取当前token的鉴权用户
      *
