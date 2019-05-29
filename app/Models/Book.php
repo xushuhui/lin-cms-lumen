@@ -4,13 +4,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 class Book extends Model
 {
-    public $id;
-    public $title;
-    public $author;
-    public $summary;
-    public $image;
+    public $hidden = ["created_at", "updated_at", "deleted_at"];
     public function getBookById($id)
     {
-        return self::where("id",$id)->get();
+        return $this->where("id",$id)->get();
     }
+
 }

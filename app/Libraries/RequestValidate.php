@@ -9,16 +9,23 @@ use Illuminate\Support\Facades\Validator;
  * Date: 2019/3/27
  * Time: 12:41
  */
-
-class RequestValidate
+use Illuminate\Http\Request;
+class RequestValidate extends Request
 {
     public $rules;
     public $msg;
-    public function validates($data)
+    public $data;
+    public function __construct()
     {
-        $validator =  Validator::make($data,$this->rules);
+        parent::__construct();
+        $this->data = json_decode($this->getContent(),true);
+    }
+    public function validates()
+    {
+        $validator =  Validator::make($this->data,$this->rules);
         if ($validator->fails()) {
             $msg = $validator->errors()->all();
+
             $this->msg = is_array($msg) ? implode(' ', $msg) :$msg;
             return false;
         }
