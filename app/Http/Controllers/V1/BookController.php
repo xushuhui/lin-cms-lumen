@@ -12,32 +12,12 @@ class BookController
 {
     public function __construct()
     {
-        $this->result = new Response();
-
         $this->service = new BookService();
     }
     public function getBooks()
     {
         $result =  $this->service->getBooks();
         return $result;
-        return [
-            [
-                "id"          => 1,
-                "author"      => "西藏城",
-                "create_time" => 1553587651000,
-                "image"       => "test",
-                "summary"     => "asf",
-                "title"       => "asf",
-            ],
-            [
-                "id"          => 1,
-                "author"      => "西藏城",
-                "create_time" => 1553587651000,
-                "image"       => "test",
-                "summary"     => "asf",
-                "title"       => "asf",
-            ]
-        ];
     }
 
     public function getBook($id = 0)
