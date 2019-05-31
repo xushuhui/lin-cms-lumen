@@ -12,6 +12,6 @@
 */
 
 $router->get('/', function () use ($router) {
-    return 123;
+    return 'lin-cms-lumen';
 });
 

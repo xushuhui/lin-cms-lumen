@@ -15,7 +15,6 @@ class CreateBookRequest extends RequestValidate
     public $author;
     public $summary;
     public $image;
-    public $data;
     public $rules = [
         'title'   => 'required|max:50',
         'author'  => 'required',
@@ -26,7 +25,6 @@ class CreateBookRequest extends RequestValidate
 
     public function load()
     {
-
         $this->title   = $this->data['title'];
         $this->author  = $this->data['author'];
         $this->summary = $this->data['summary'];
