@@ -75,7 +75,8 @@ class UserController extends Controller
     //刷新令牌
     public function refresh()
     {
-        # code...
+        $result =  $this->service->refreshToken();
+        return $result;
     }
 
     //查询自己拥有的权限 验证token

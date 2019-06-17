@@ -89,4 +89,10 @@ class UserService
         $this->result->setData(JWTAuth::user());
         return $this->result->toArray();   
     }
+    public function refreshToken()
+    {
+        $refreshToken = JWTAuth::parseToken()->refresh();
+        $this->result->setData(['token'=>$refreshToken]);
+        return $this->result->toArray();
+    }
 }
