@@ -15,6 +15,8 @@ use App\Requests\User\LoginRequest;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use App\Requests\User\RegisterRequest;
 use App\Models\User;
+use App\Requests\User\SetAvatorRequest;
+use Illuminate\Support\Facades\Hash;
 
 class UserService
 {
@@ -24,10 +26,14 @@ class UserService
     {
         $this->result = new Response();
     }
+    public function getCurrentUser(){
+        return JWTAuth::user();
+    }
+    //登录
     public function login(LoginRequest $request)
     {
         do{
-            $token = JWTAuth::attempt($request->only('nickname', 'password'));
+            $token = JWTAuth::attempt(['nickname'=>$request->nickname,'password'=>$request->password]);
             if (!$token) {
                 $this->result->fail(ErrorCodeTable::CODE_NO_USER);
                 break;
@@ -59,5 +65,19 @@ class UserService
             };
         }while(false);
         return $this->result->toArray();    
+    }
+    //设置头像
+    public function setAvatar(SetAvatorRequest $request)
+    {
+        do{
+            $userId = JWTAuth::user()->id;
+            $userModel           = User::find($userId);
+            $userModel->avatar = $request->avatar;
+            if (!$userModel->save()) {
+                $this->result->fail(ErrorCodeTable::CODE_SQL_ERROR);
+                break;
+            };
+        }while(false);
+        return $this->result->toArray();
     }
 }

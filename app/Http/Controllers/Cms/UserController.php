@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use App\Requests\User\RegisterRequest;
+use App\Requests\User\SetAvatorRequest;
 
 class UserController extends Controller
 {
@@ -21,7 +22,6 @@ class UserController extends Controller
     //注册
     public function register(RegisterRequest $request)
     {
-       
         if($request->validates() && $request->load()){
             $result =  $this->service->register($request);
         }else{
@@ -40,7 +40,16 @@ class UserController extends Controller
         }
         return $result;
     }
-
+    //设置头像
+    public function setAvatar(SetAvatorRequest $request)
+    {
+        if($request->validates() && $request->load()){
+            $result =  $this->service->setAvatar($request);
+        }else{
+            $result =  $request->getLastError();
+        }
+        return $result;
+    }
     /**
      * 注销，把所给token加入黑名单
      *
