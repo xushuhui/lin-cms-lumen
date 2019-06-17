@@ -50,7 +50,52 @@ class UserController extends Controller
         }
         return $result;
     }
-    /**
+   
+
+
+    //更新用户信息
+    public function update()
+    {
+        # code...
+    }
+
+    //修改密码
+    public function changePassword()
+    {
+        # code...
+    }
+
+    //查询自己信息
+    public function getInformation()
+    {
+        $result =  $this->service->getInfo();
+        return $result;
+    }
+
+    //刷新令牌
+    public function refresh()
+    {
+        # code...
+    }
+
+    //查询自己拥有的权限 验证token
+    public function auths()
+    {
+        return [
+            'id'          => 1,
+            'active'      => 1,
+            'auths'       => [],
+            'create_time' => 1546339219000,
+            'delete_time' => null,
+            'email'       => '12345678@qq.com',
+            'group_id'    => null,
+            'nickname'    => 'super',
+            'super'       => 2,
+            'update_time' => '2019-03-18T10:21:58Z'
+        ];
+
+    }
+     /**
      * 注销，把所给token加入黑名单
      *
      * @return \Illuminate\Http\JsonResponse
@@ -85,57 +130,5 @@ class UserController extends Controller
             'token_type'   => 'bearer',
             'expires_in'   => JWTAuth::factory()->getTTL() * 60,
         ]);
-    }
-
-    /**
-     * 获取当前token的鉴权用户
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function me()
-    {
-        return response()->json(JWTAuth::user());
-    }
-
-    //更新用户信息
-    public function update()
-    {
-        # code...
-    }
-
-    //修改密码
-    public function changePassword()
-    {
-        # code...
-    }
-
-    //查询自己信息
-    public function information()
-    {
-        # code...
-    }
-
-    //刷新令牌
-    public function refresh()
-    {
-        # code...
-    }
-
-    //查询自己拥有的权限 验证token
-    public function auths()
-    {
-        return [
-            'id'          => 1,
-            'active'      => 1,
-            'auths'       => [],
-            'create_time' => 1546339219000,
-            'delete_time' => null,
-            'email'       => '12345678@qq.com',
-            'group_id'    => null,
-            'nickname'    => 'super',
-            'super'       => 2,
-            'update_time' => '2019-03-18T10:21:58Z'
-        ];
-
     }
 }

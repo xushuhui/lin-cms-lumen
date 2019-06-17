@@ -72,6 +72,10 @@ class UserService
         do{
             $userId = JWTAuth::user()->id;
             $userModel           = User::find($userId);
+            if (!$userModel) {
+                $this->result->fail(ErrorCodeTable::CODE_NO_USER);
+                break;
+            };
             $userModel->avatar = $request->avatar;
             if (!$userModel->save()) {
                 $this->result->fail(ErrorCodeTable::CODE_SQL_ERROR);
@@ -79,5 +83,10 @@ class UserService
             };
         }while(false);
         return $this->result->toArray();
+    }
+    public function getInfo()
+    {
+        $this->result->setData(JWTAuth::user());
+        return $this->result->toArray();   
     }
 }
