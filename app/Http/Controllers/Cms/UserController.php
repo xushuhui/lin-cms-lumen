@@ -30,7 +30,6 @@ class UserController extends Controller
     //登录
     public function login(LoginRequest $request)
     {
-
         if($request->validates() && $request->load()){
             $result =  $this->service->login($request);
         }else{
