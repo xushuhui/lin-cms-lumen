@@ -3,11 +3,10 @@
 namespace App\Http\Controllers\Cms;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
+
 use App\Requests\User\LoginRequest;
 use App\Services\UserService;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
+
 use Tymon\JWTAuth\Facades\JWTAuth;
 use App\Requests\User\RegisterRequest;
 use App\Requests\User\SetAvatorRequest;

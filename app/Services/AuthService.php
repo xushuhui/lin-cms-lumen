@@ -2,6 +2,8 @@
 namespace App\Services;
 
 use App\Libraries\Response;
+use App\Requests\Admin\ChangeUserPasswordRequest;
+use App\Models\User;
 
 class AuthService
 {
@@ -29,5 +31,29 @@ class AuthService
         $this->result->setData($arr);
         return $this->result->toArray();
 
+    }
+    public function getAdminUsers()
+    {
+        $arr = [];
+        $this->result->setData($arr);
+        return $this->result->toArray();
+    }
+    public function changeUserPassword(ChangeUserPasswordRequest $request)
+    {
+        do{
+            $userModel = User::find($request->id);
+            if (!$userModel) {
+                $this->result->fail(ErrorCodeTable::CODE_NO_USER);
+                break;
+            };
+            $userModel->password = $request->newPassword;
+            if (!$userModel->save()) {
+                $this->result->fail(ErrorCodeTable::CODE_SQL_ERROR);
+                break;
+            };
+            $this->result->succeed();
+        }while(false);
+        return $this->result->toArray();
+        
     }
 }

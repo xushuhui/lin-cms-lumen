@@ -58,4 +58,5 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     {
         return $this->where("nickname",$nickname)->get();
     }
+    
 }

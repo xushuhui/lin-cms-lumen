@@ -111,7 +111,7 @@ class UserService
                 $this->result->setData($user);
                 break;
             }
-            $authModel = new Auth();
+    
             ///TODO
             // {
             //     "active": 1,
@@ -144,9 +144,8 @@ class UserService
             // }
            
         }while(false);
-       
         $this->result->setData([$userModel]);
         return $this->result->toArray();
-        // $user['auths'] = $auths;
+
     }
 }

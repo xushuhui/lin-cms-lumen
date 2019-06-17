@@ -3,6 +3,7 @@ namespace App\Http\Controllers\Cms;
 
 use App\Requests\Admin\CreateGroupRequest;
 use App\Services\AuthService;
+use App\Requests\Admin\ChangeUserPasswordRequest;
 
 class AdminController  
 {
@@ -20,12 +21,18 @@ class AdminController
     //查询所有用户
     public function getAdminUsers()
     {
-
+        $result =  $this->service->getAdminUsers();
+        return $result;
     }
     //修改用户密码
-    public function changeUserPassword()
+    public function changeUserPassword(ChangeUserPasswordRequest $request)
     {
-        # code...
+        if($request->validates() && $request->load()){
+            $result =  $this->service->changeUserPassword($request);
+        }else{
+            $result =  $request->getLastError();
+        }
+        return $result;
     }
     //管理员更新用户信息
     public function deleteUser()
