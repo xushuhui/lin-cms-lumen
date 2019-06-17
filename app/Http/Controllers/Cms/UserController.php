@@ -9,6 +9,7 @@ use App\Services\UserService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Tymon\JWTAuth\Facades\JWTAuth;
+use App\Requests\User\RegisterRequest;
 
 class UserController extends Controller
 {
@@ -18,13 +19,15 @@ class UserController extends Controller
         $this->service = new UserService();
     }
     //注册
-    public function register(Request $request)
+    public function register(RegisterRequest $request)
     {
-        $user           = new User();
-        $user->nickname = $request->post('nickname');
-        $user->password = Hash::make($request->input('password'));
-        $user->save();
-        return "rests";
+       
+        if($request->validates() && $request->load()){
+            $result =  $this->service->register($request);
+        }else{
+            $result =  $request->getLastError();
+        }
+        return $result;
     }
 
     //登录

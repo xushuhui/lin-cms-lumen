@@ -50,4 +50,12 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     {
         return [];
     }
+    public function getUserByEmail()
+    {
+
+    }
+    public function getUserByNickName()
+    {
+        
+    }
 }

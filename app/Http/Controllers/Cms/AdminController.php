@@ -77,8 +77,6 @@ class AdminController
     {
         # code...
     }
-    public function test(){
-        
-    }
+
     
 }
