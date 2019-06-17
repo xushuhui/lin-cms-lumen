@@ -50,12 +50,12 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     {
         return [];
     }
-    public function getUserByEmail()
+    public function getUserByEmail($email)
     {
-
+        return $this->where("email",$email)->get();
     }
-    public function getUserByNickName()
+    public function getUserByNickName($nickname)
     {
-        
+        return $this->where("nickname",$nickname)->get();
     }
 }

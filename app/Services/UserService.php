@@ -17,6 +17,8 @@ use App\Requests\User\RegisterRequest;
 use App\Models\User;
 use App\Requests\User\SetAvatorRequest;
 use Illuminate\Support\Facades\Hash;
+use App\Models\Group;
+use App\Models\Auth;
 
 class UserService
 {
@@ -94,5 +96,57 @@ class UserService
         $refreshToken = JWTAuth::parseToken()->refresh();
         $this->result->setData(['token'=>$refreshToken]);
         return $this->result->toArray();
+    }
+    public function getAuths()
+    {
+        do{
+            $user = JWTAuth::user();
+            $userModel           = User::find($user->id);
+            if (!$userModel) {
+                $this->result->fail(ErrorCodeTable::CODE_NO_USER);
+                break;
+            };
+            if(!$user->group_id){
+                $user['auths'] = [];
+                $this->result->setData($user);
+                break;
+            }
+            $authModel = new Auth();
+            ///TODO
+            // {
+            //     "active": 1,
+            //     "admin": 1,
+            //     "auths": [
+            //         {
+            //             "信息": [
+            //                 {
+            //                     "auth": "查看lin的信息",
+            //                     "module": "信息"
+            //                 }
+            //             ]
+            //         },
+            //         {
+            //             "图书": [
+            //                 {
+            //                     "auth": "删除图书",
+            //                     "module": "图书"
+            //                 }
+            //             ]
+            //         }
+            //     ],
+            //     "avatar": null,
+            //     "create_time": 1560752840000,
+            //     "email": "123456@er.com",
+            //     "group_id": 32,
+            //     "id": 58,
+            //     "nickname": "ee",
+            //     "update_time": 1560757604000
+            // }
+           
+        }while(false);
+       
+        $this->result->setData([$userModel]);
+        return $this->result->toArray();
+        // $user['auths'] = $auths;
     }
 }

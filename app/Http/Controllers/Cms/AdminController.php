@@ -1,16 +1,26 @@
 <?php
 namespace App\Http\Controllers\Cms;
 
+use App\Requests\Admin\CreateGroupRequest;
+use App\Services\AuthService;
+
 class AdminController  
 {
+    public $service;
+    public function __construct()
+    {
+        $this->service = new AuthService();
+    }
     //查询所有可分配的权限
     public function authority()
     {
-
+        $result =  $this->service->authority();
+        return $result;
     }
     //查询所有用户
     public function getAdminUsers()
     {
+
     }
     //修改用户密码
     public function changeUserPassword()
@@ -48,9 +58,14 @@ class AdminController
         # code...
     }
     //新建权限组
-    public function createGroup()
+    public function createGroup(CreateGroupRequest $request)
     {
-        # code...
+        if($request->validates() && $request->load()){
+            $result =  $this->service->setAvatar($request);
+        }else{
+            $result =  $request->getLastError();
+        }
+        return $result;
     }
     //更新权限组
     public function updateGroup()
