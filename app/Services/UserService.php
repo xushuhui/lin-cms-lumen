@@ -19,6 +19,7 @@ use App\Requests\User\SetAvatorRequest;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Group;
 use App\Models\Auth;
+use App\Events\LoggerEvent;
 
 class UserService
 {
@@ -41,6 +42,12 @@ class UserService
                 break;
             };
             $this->result->setData(['token'=>$token]);
+            
+            event(new LoggerEvent([
+                'nickname'=>$request->nickname,
+                'msg'=>"登陆成功获取了令牌",
+                'user_id'=>JWTAuth::user()->id
+                ]));
         }while(false);
         return $this->result->toArray();
     }

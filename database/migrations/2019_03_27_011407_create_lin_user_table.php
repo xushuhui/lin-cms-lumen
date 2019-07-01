@@ -22,8 +22,11 @@ class CreateLinUserTable extends Migration
             $table->integer('group_id');
             $table->string('email', 100);
             $table->string('avatar', 100);
-            $table->timestamps();
-            $table->softDeletes();
+            $table->integer('created_at');
+            $table->integer('updated_at');
+            $table->integer('deleted_at');
+            //$table->timestamps();
+            //$table->softDeletes();
         });
     }
 
