@@ -1,5 +1,11 @@
 <?php
-
+/**
+ * Copyright (c) 2019 - xushuhui
+ * Author: xushuhui
+ * 微信公众号: 互联网工程师
+ * Email: xushuhui@qq.com
+ * 博客: https://www.phpst.cn
+ */
 $router->group(['prefix' => 'cms','namespace' => '\App\Http\Controllers\Cms'], function () use ($router) {
     // 账户相关接口分组
     $router->group(['prefix' =>'user'], function () use ($router) { 
