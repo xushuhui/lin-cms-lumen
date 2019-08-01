@@ -8,10 +8,9 @@
  */
 namespace App\Requests\User;
 
-
 use App\Libraries\RequestValidate;
 
-class RegisterRequest  extends RequestValidate
+class RegisterRequest extends RequestValidate
 {
     public $nickname;
     public $password;

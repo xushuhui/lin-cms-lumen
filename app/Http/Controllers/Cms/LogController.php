@@ -9,7 +9,7 @@
 
 namespace App\Http\Controllers\Cms;
 
-class LogController  
+class LogController
 {
     //查询所有日志
     public function index()

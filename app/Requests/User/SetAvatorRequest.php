@@ -9,10 +9,9 @@
 
 namespace App\Requests\User;
 
-
 use App\Libraries\RequestValidate;
 
-class SetAvatorRequest  extends RequestValidate
+class SetAvatorRequest extends RequestValidate
 {
     public $avatar;
    

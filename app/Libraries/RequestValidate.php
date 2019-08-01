@@ -10,6 +10,7 @@ namespace App\Libraries;
 
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
+
 class RequestValidate extends Request
 {
     public $rules;
@@ -18,11 +19,11 @@ class RequestValidate extends Request
     public function __construct()
     {
         parent::__construct();
-        $this->data = json_decode($this->getContent(),true);
+        $this->data = json_decode($this->getContent(), true);
     }
     public function validates()
     {
-        $validator =  Validator::make($this->data,$this->rules);
+        $validator =  Validator::make($this->data, $this->rules);
         if ($validator->fails()) {
             $msg = $validator->errors()->all();
 
@@ -31,17 +32,16 @@ class RequestValidate extends Request
         }
         return true;
     }
-    public  function getLastError()
+    public function getLastError()
     {
         $result = new Response();
-        $result->setResult(ErrorCodeTable::CODE_INVALID_PARAMS,$this->msg);
+        $result->setResult(ErrorCodeTable::CODE_INVALID_PARAMS, $this->msg);
         return $result->toArray();
     }
-    public  function error()
+    public function error()
     {
         $result = new Response();
         $result->fail(ErrorCodeTable::CODE_INVALID_PARAMS);
         return $result->toArray();
     }
-
 }

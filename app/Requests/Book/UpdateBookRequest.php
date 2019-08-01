@@ -10,7 +10,6 @@ namespace App\Requests\Book;
 
 use App\Libraries\RequestValidate;
 
-
 class UpdateBookRequest extends RequestValidate
 {
     public $title;
@@ -36,5 +35,4 @@ class UpdateBookRequest extends RequestValidate
         $this->image   = $this->data['image'];
         return true;
     }
-
 }

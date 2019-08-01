@@ -39,10 +39,9 @@ class BookController
 
     public function createBook(CreateBookRequest $request)
     {
-
-        if($request->validates() && $request->load()){
+        if ($request->validates() && $request->load()) {
             $result =  $this->service->createBook($request);
-        }else{
+        } else {
             $result =  $request->getLastError();
         }
         return $result;
@@ -50,10 +49,9 @@ class BookController
 
     public function updateBook(UpdateBookRequest $request)
     {
-
-        if($request->validates() && $request->load()){
+        if ($request->validates() && $request->load()) {
             $result =  $this->service->updateBook($request);
-        }else{
+        } else {
             $result =  $request->getLastError();
         }
         return $result;
@@ -73,5 +71,4 @@ class BookController
     {
         # code...
     }
-
 }

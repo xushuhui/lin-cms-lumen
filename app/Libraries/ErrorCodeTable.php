@@ -8,6 +8,7 @@
  */
 
 namespace App\Libraries;
+
 class ErrorCodeTable
 {
     const CODE_OK                      = 0;

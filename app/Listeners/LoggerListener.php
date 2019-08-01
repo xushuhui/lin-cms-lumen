@@ -14,7 +14,7 @@ use App\Models\Log;
 
 class LoggerListener
 {
-      /**
+    /**
      * Create the event listener.
      *
      * @return void
@@ -37,6 +37,5 @@ class LoggerListener
         $logModel->user_name = $event->data['nickname'];
         $logModel->user_id = $event->data['user_id'];
         $logModel->save();
-
     }
 }

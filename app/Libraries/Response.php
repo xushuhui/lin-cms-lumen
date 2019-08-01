@@ -14,12 +14,12 @@ class Response
     protected $error_code  = 0;
     protected $msg = 'OK';
 
-    public function  fail($code)
+    public function fail($code)
     {
         self::setCode($code);
     }
 
-    public function  succeed()
+    public function succeed()
     {
         self::setCode(ErrorCodeTable::CODE_OK);
     }
@@ -28,28 +28,27 @@ class Response
     {
         $this->error_code = $code;
         $this->msg = ErrorCodeTable::$table[$code];
-
     }
-    public function  setData($data)
+    public function setData($data)
     {
         $this->data = $data;
     }
-    public function  getData()
+    public function getData()
     {
         return $this->data;
     }
-    public function setResult($code,$msg)
+    public function setResult($code, $msg)
     {
         $this->error_code = $code;
         $this->msg = $msg;
     }
 
-    public function  isFailed()
+    public function isFailed()
     {
         return $this->error_code !== ErrorCodeTable::CODE_OK;
     }
 
-    public function  isSucceed()
+    public function isSucceed()
     {
         return $this->error_code === ErrorCodeTable::CODE_OK;
     }

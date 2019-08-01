@@ -9,7 +9,6 @@
 
 namespace App\Requests\User;
 
-
 use App\Libraries\RequestValidate;
 
 class LoginRequest extends RequestValidate

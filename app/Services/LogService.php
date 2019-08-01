@@ -7,7 +7,7 @@
  * 博客: https://www.phpst.cn
  */
 namespace App\Services;
+
 class LogService
 {
-    
 }

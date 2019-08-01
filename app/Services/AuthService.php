@@ -37,7 +37,6 @@ class AuthService
         ];
         $this->result->setData($arr);
         return $this->result->toArray();
-
     }
     public function getAdminUsers()
     {
@@ -47,7 +46,7 @@ class AuthService
     }
     public function changeUserPassword(ChangeUserPasswordRequest $request)
     {
-        do{
+        do {
             $userModel = User::find($request->id);
             if (!$userModel) {
                 $this->result->fail(ErrorCodeTable::CODE_NO_USER);
@@ -59,8 +58,7 @@ class AuthService
                 break;
             };
             $this->result->succeed();
-        }while(false);
+        } while (false);
         return $this->result->toArray();
-        
     }
 }

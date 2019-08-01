@@ -7,6 +7,7 @@
  * 博客: https://www.phpst.cn
  */
 namespace App\Requests\Admin;
+
 class ChangeUserPasswordRequest
 {
     //{"new_password":"123456","confirm_password":"123456"}

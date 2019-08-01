@@ -28,9 +28,9 @@ class UserController extends Controller
     //注册
     public function register(RegisterRequest $request)
     {
-        if($request->validates() && $request->load()){
+        if ($request->validates() && $request->load()) {
             $result =  $this->service->register($request);
-        }else{
+        } else {
             $result =  $request->getLastError();
         }
         return $result;
@@ -39,9 +39,9 @@ class UserController extends Controller
     //登录
     public function login(LoginRequest $request)
     {
-        if($request->validates() && $request->load()){
+        if ($request->validates() && $request->load()) {
             $result =  $this->service->login($request);
-        }else{
+        } else {
             $result =  $request->getLastError();
         }
         return $result;
@@ -49,9 +49,9 @@ class UserController extends Controller
     //设置头像
     public function setAvatar(SetAvatorRequest $request)
     {
-        if($request->validates() && $request->load()){
+        if ($request->validates() && $request->load()) {
             $result =  $this->service->setAvatar($request);
-        }else{
+        } else {
             $result =  $request->getLastError();
         }
         return $result;
@@ -79,11 +79,11 @@ class UserController extends Controller
     }
 
     //刷新令牌
-     /**
-     * 刷新token，如果开启黑名单，以前的token便会失效，指的注意的是用上面的getToken再获取一次Token并不算做刷新，两次获得的Token是并行的，即两个都可用。
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
+    /**
+    * 刷新token，如果开启黑名单，以前的token便会失效，指的注意的是用上面的getToken再获取一次Token并不算做刷新，两次获得的Token是并行的，即两个都可用。
+    *
+    * @return \Illuminate\Http\JsonResponse
+    */
     public function refresh()
     {
         $result =  $this->service->refreshToken();
@@ -96,11 +96,11 @@ class UserController extends Controller
         $result =  $this->service->getAuths();
         return $result;
     }
-     /**
-     * 注销，把所给token加入黑名单
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
+    /**
+    * 注销，把所给token加入黑名单
+    *
+    * @return \Illuminate\Http\JsonResponse
+    */
     public function deleteToken()
     {
         JWTAuth::parseToken()->invalidate();

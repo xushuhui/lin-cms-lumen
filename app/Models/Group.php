@@ -12,6 +12,6 @@ class Group extends BaseModel
 {
     public function getGroupByName($name)
     {
-        return $this->where("name",$name)->get();
+        return $this->where("name", $name)->get();
     }
 }

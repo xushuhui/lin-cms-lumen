@@ -13,7 +13,7 @@ use App\Requests\Admin\CreateGroupRequest;
 use App\Services\AuthService;
 use App\Requests\Admin\ChangeUserPasswordRequest;
 
-class AdminController  
+class AdminController
 {
     public $service;
     public function __construct()
@@ -35,9 +35,9 @@ class AdminController
     //修改用户密码
     public function changeUserPassword(ChangeUserPasswordRequest $request)
     {
-        if($request->validates() && $request->load()){
+        if ($request->validates() && $request->load()) {
             $result =  $this->service->changeUserPassword($request);
-        }else{
+        } else {
             $result =  $request->getLastError();
         }
         return $result;
@@ -75,9 +75,9 @@ class AdminController
     //新建权限组
     public function createGroup(CreateGroupRequest $request)
     {
-        if($request->validates() && $request->load()){
+        if ($request->validates() && $request->load()) {
             $result =  $this->service->setAvatar($request);
-        }else{
+        } else {
             $result =  $request->getLastError();
         }
         return $result;
@@ -107,6 +107,4 @@ class AdminController
     {
         # code...
     }
-
-    
 }

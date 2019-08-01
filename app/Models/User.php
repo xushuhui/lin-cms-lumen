@@ -15,7 +15,7 @@ use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class User extends Model implements AuthenticatableContract, AuthorizableContract,JWTSubject
+class User extends Model implements AuthenticatableContract, AuthorizableContract, JWTSubject
 {
     use Authenticatable, Authorizable;
     protected $table='lin_user';
@@ -58,11 +58,10 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     }
     public function getUserByEmail($email)
     {
-        return $this->where("email",$email)->get();
+        return $this->where("email", $email)->get();
     }
     public function getUserByNickName($nickname)
     {
-        return $this->where("nickname",$nickname)->get();
+        return $this->where("nickname", $nickname)->get();
     }
-    
 }

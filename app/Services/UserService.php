@@ -9,7 +9,6 @@
 
 namespace App\Services;
 
-
 use App\Libraries\ErrorCodeTable;
 use App\Libraries\Response;
 use App\Requests\User\LoginRequest;
@@ -30,13 +29,14 @@ class UserService
     {
         $this->result = new Response();
     }
-    public function getCurrentUser(){
+    public function getCurrentUser()
+    {
         return JWTAuth::user();
     }
     //登录
     public function login(LoginRequest $request)
     {
-        do{
+        do {
             $token = JWTAuth::attempt(['nickname'=>$request->nickname,'password'=>$request->password]);
             if (!$token) {
                 $this->result->fail(ErrorCodeTable::CODE_NO_USER);
@@ -49,20 +49,20 @@ class UserService
                 'msg'=>"登陆成功获取了令牌",
                 'user_id'=>JWTAuth::user()->id
                 ]));
-        }while(false);
+        } while (false);
         return $this->result->toArray();
     }
     public function register(RegisterRequest $request)
     {
-        do{
+        do {
             $userModel           = new User();
             $user = $userModel->getUserByEmail($request->email);
-            if($user){
+            if ($user) {
                 $this->result->fail(ErrorCodeTable::CODE_USER_EXIST);
                 break;
             }
             $user = $userModel->getUserByNickName($request->nickname);
-            if($user){
+            if ($user) {
                 $this->result->fail(ErrorCodeTable::CODE_USER_EXIST);
                 break;
             }
@@ -73,13 +73,13 @@ class UserService
                 $this->result->fail(ErrorCodeTable::CODE_SQL_ERROR);
                 break;
             };
-        }while(false);
-        return $this->result->toArray();    
+        } while (false);
+        return $this->result->toArray();
     }
     //设置头像
     public function setAvatar(SetAvatorRequest $request)
     {
-        do{
+        do {
             $userId = JWTAuth::user()->id;
             $userModel           = User::find($userId);
             if (!$userModel) {
@@ -91,13 +91,13 @@ class UserService
                 $this->result->fail(ErrorCodeTable::CODE_SQL_ERROR);
                 break;
             };
-        }while(false);
+        } while (false);
         return $this->result->toArray();
     }
     public function getInfo()
     {
         $this->result->setData(JWTAuth::user());
-        return $this->result->toArray();   
+        return $this->result->toArray();
     }
     public function refreshToken()
     {
@@ -107,14 +107,14 @@ class UserService
     }
     public function getAuths()
     {
-        do{
+        do {
             $user = JWTAuth::user();
             $userModel           = User::find($user->id);
             if (!$userModel) {
                 $this->result->fail(ErrorCodeTable::CODE_NO_USER);
                 break;
             };
-            if(!$user->group_id){
+            if (!$user->group_id) {
                 $user['auths'] = [];
                 $this->result->setData($user);
                 break;
@@ -150,10 +150,8 @@ class UserService
             //     "nickname": "ee",
             //     "update_time": 1560757604000
             // }
-           
-        }while(false);
+        } while (false);
         $this->result->setData([$userModel]);
         return $this->result->toArray();
-
     }
 }

@@ -9,7 +9,6 @@
 
 namespace App\Services;
 
-
 use App\Libraries\ErrorCodeTable;
 use App\Libraries\Response;
 use App\Models\Book;
@@ -61,7 +60,6 @@ class BookService
 
     public function deleteBook($id)
     {
-
         return $this->result->toArray();
     }
 
@@ -78,6 +76,4 @@ class BookService
         $this->result->setData($data);
         return $this->result->toArray();
     }
-
-
 }
