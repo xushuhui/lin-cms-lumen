@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright (c) 2019 - xushuhui
  * Author: xushuhui
@@ -9,7 +10,7 @@
 
 namespace App\Services;
 
-use App\Libraries\ErrorCodeTable;
+use App\Libraries\CodeTable;
 use App\Libraries\Response;
 use App\Models\Book;
 use App\Requests\Book\CreateBookRequest;
@@ -33,7 +34,7 @@ class BookService
             $model->author  = $request->author;
             $model->image   = $request->image;
             if (!$model->save()) {
-                $this->result->fail(ErrorCodeTable::CODE_SQL_ERROR);
+                $this->result->fail(CodeTable::SQL_ERROR);
                 break;
             };
             $this->result->succeed();
@@ -50,7 +51,7 @@ class BookService
             $model->author  = $request->author;
             $model->image   = $request->image;
             if (!$model->save()) {
-                $this->result->fail(ErrorCodeTable::CODE_SQL_ERROR);
+                $this->result->fail(CodeTable::SQL_ERROR);
                 break;
             };
         } while (false);

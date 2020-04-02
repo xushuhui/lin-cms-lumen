@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright (c) 2019 - xushuhui
  * Author: xushuhui
@@ -6,6 +7,7 @@
  * Email: xushuhui@qq.com
  * 博客: https://www.phpst.cn
  */
+
 namespace App\Services;
 
 use App\Libraries\Response;
@@ -23,16 +25,16 @@ class AuthService
     public function authority()
     {
         $arr = [
-            "信息" =>[
-                "查看lin的信息" =>["cms.test+info"]
+            "信息" => [
+                "查看lin的信息" => ["cms.test+info"]
             ],
-            "图书" =>[
-                "删除图书" =>["v1.book+delete_book"]
+            "图书" => [
+                "删除图书" => ["v1.book+delete_book"]
             ],
-            "日志" =>[
-                "搜索日志" =>["cms.log+get_user_logs"],
-                "查询所有日志" =>["cms.log+get_logs"],
-                "查询日志记录的用户" =>["cms.log+get_users"],
+            "日志" => [
+                "搜索日志" => ["cms.log+get_user_logs"],
+                "查询所有日志" => ["cms.log+get_logs"],
+                "查询日志记录的用户" => ["cms.log+get_users"],
             ],
         ];
         $this->result->setData($arr);
@@ -49,12 +51,12 @@ class AuthService
         do {
             $userModel = User::find($request->id);
             if (!$userModel) {
-                $this->result->fail(ErrorCodeTable::CODE_NO_USER);
+                $this->result->fail(CodeTable::NO_USER);
                 break;
             };
             $userModel->password = $request->newPassword;
             if (!$userModel->save()) {
-                $this->result->fail(ErrorCodeTable::CODE_SQL_ERROR);
+                $this->result->fail(CodeTable::SQL_ERROR);
                 break;
             };
             $this->result->succeed();

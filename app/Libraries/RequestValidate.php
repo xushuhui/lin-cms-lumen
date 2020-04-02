@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright (c) 2019 - xushuhui
  * Author: xushuhui
@@ -6,6 +7,7 @@
  * Email: xushuhui@qq.com
  * 博客: https://www.phpst.cn
  */
+
 namespace App\Libraries;
 
 use Illuminate\Support\Facades\Validator;
@@ -14,7 +16,7 @@ use Illuminate\Http\Request;
 class RequestValidate extends Request
 {
     public $rules;
-    public $msg;
+    public $message;
     public $data;
     public function __construct()
     {
@@ -25,9 +27,9 @@ class RequestValidate extends Request
     {
         $validator =  Validator::make($this->data, $this->rules);
         if ($validator->fails()) {
-            $msg = $validator->errors()->all();
+            $message = $validator->errors()->all();
 
-            $this->msg = is_array($msg) ? implode(' ', $msg) :$msg;
+            $this->message = is_array($message) ? implode(' ', $message) : $message;
             return false;
         }
         return true;
@@ -35,13 +37,13 @@ class RequestValidate extends Request
     public function getLastError()
     {
         $result = new Response();
-        $result->setResult(ErrorCodeTable::CODE_INVALID_PARAMS, $this->msg);
+        $result->setResult(CodeTable::INVALID_PARAMS, $this->message);
         return $result->toArray();
     }
     public function error()
     {
         $result = new Response();
-        $result->fail(ErrorCodeTable::CODE_INVALID_PARAMS);
+        $result->fail(CodeTable::INVALID_PARAMS);
         return $result->toArray();
     }
 }

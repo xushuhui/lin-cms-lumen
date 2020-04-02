@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright (c) 2019 - xushuhui
  * Author: xushuhui
@@ -6,13 +7,14 @@
  * Email: xushuhui@qq.com
  * 博客: https://www.phpst.cn
  */
+
 namespace App\Libraries;
 
 class Response
 {
     protected $data = [];
-    protected $error_code  = 0;
-    protected $msg = 'OK';
+    protected $code  = 0;
+    protected $message = 'OK';
 
     public function fail($code)
     {
@@ -21,13 +23,13 @@ class Response
 
     public function succeed()
     {
-        self::setCode(ErrorCodeTable::CODE_OK);
+        self::setCode(CodeTable::OK);
     }
 
     public function setCode($code)
     {
-        $this->error_code = $code;
-        $this->msg = ErrorCodeTable::$table[$code];
+        $this->code = $code;
+        $this->message = CodeTable::$table[$code];
     }
     public function setData($data)
     {
@@ -37,27 +39,27 @@ class Response
     {
         return $this->data;
     }
-    public function setResult($code, $msg)
+    public function setResult($code, $message)
     {
-        $this->error_code = $code;
-        $this->msg = $msg;
+        $this->code = $code;
+        $this->message = $message;
     }
 
     public function isFailed()
     {
-        return $this->error_code !== ErrorCodeTable::CODE_OK;
+        return $this->code !== CodeTable::OK;
     }
 
     public function isSucceed()
     {
-        return $this->error_code === ErrorCodeTable::CODE_OK;
+        return $this->code === CodeTable::OK;
     }
     public function toArray()
     {
         return [
-            'error_code'=>$this->error_code,
-            'msg'=>$this->msg,
-            'data'=>$this->data
+            'code' => $this->code,
+            'message' => $this->message,
+            'data' => $this->data
         ];
     }
 }

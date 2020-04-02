@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright (c) 2019 - xushuhui
  * Author: xushuhui
@@ -33,7 +34,7 @@ class LoggerListener
     public function handle(LoggerEvent $event)
     {
         $logModel = new Log();
-        $logModel->message = $event->data['msg'];
+        $logModel->message = $event->data['message'];
         $logModel->user_name = $event->data['nickname'];
         $logModel->user_id = $event->data['user_id'];
         $logModel->save();

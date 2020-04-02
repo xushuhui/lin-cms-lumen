@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright (c) 2019 - xushuhui
  * Author: xushuhui
@@ -9,7 +10,7 @@
 
 namespace App\Services;
 
-use App\Libraries\ErrorCodeTable;
+use App\Libraries\CodeTable;
 use App\Libraries\Response;
 use App\Requests\User\LoginRequest;
 use Tymon\JWTAuth\Facades\JWTAuth;
@@ -37,18 +38,18 @@ class UserService
     public function login(LoginRequest $request)
     {
         do {
-            $token = JWTAuth::attempt(['nickname'=>$request->nickname,'password'=>$request->password]);
+            $token = JWTAuth::attempt(['nickname' => $request->nickname, 'password' => $request->password]);
             if (!$token) {
-                $this->result->fail(ErrorCodeTable::CODE_NO_USER);
+                $this->result->fail(CodeTable::NO_USER);
                 break;
             };
-            $this->result->setData(['token'=>$token]);
-            
+            $this->result->setData(['token' => $token]);
+
             event(new LoggerEvent([
-                'nickname'=>$request->nickname,
-                'msg'=>"登陆成功获取了令牌",
-                'user_id'=>JWTAuth::user()->id
-                ]));
+                'nickname' => $request->nickname,
+                'message' => "登陆成功获取了令牌",
+                'user_id' => JWTAuth::user()->id
+            ]));
         } while (false);
         return $this->result->toArray();
     }
@@ -58,19 +59,19 @@ class UserService
             $userModel           = new User();
             $user = $userModel->getUserByEmail($request->email);
             if ($user) {
-                $this->result->fail(ErrorCodeTable::CODE_USER_EXIST);
+                $this->result->fail(CodeTable::USER_EXIST);
                 break;
             }
             $user = $userModel->getUserByNickName($request->nickname);
             if ($user) {
-                $this->result->fail(ErrorCodeTable::CODE_USER_EXIST);
+                $this->result->fail(CodeTable::USER_EXIST);
                 break;
             }
             $userModel->nickname = $request->nickname;
             $userModel->password = Hash::make($request->password);
             $userModel->email = $request->email;
             if (!$userModel->save()) {
-                $this->result->fail(ErrorCodeTable::CODE_SQL_ERROR);
+                $this->result->fail(CodeTable::SQL_ERROR);
                 break;
             };
         } while (false);
@@ -83,12 +84,12 @@ class UserService
             $userId = JWTAuth::user()->id;
             $userModel           = User::find($userId);
             if (!$userModel) {
-                $this->result->fail(ErrorCodeTable::CODE_NO_USER);
+                $this->result->fail(CodeTable::NO_USER);
                 break;
             };
             $userModel->avatar = $request->avatar;
             if (!$userModel->save()) {
-                $this->result->fail(ErrorCodeTable::CODE_SQL_ERROR);
+                $this->result->fail(CodeTable::SQL_ERROR);
                 break;
             };
         } while (false);
@@ -102,7 +103,7 @@ class UserService
     public function refreshToken()
     {
         $refreshToken = JWTAuth::parseToken()->refresh();
-        $this->result->setData(['token'=>$refreshToken]);
+        $this->result->setData(['token' => $refreshToken]);
         return $this->result->toArray();
     }
     public function getAuths()
@@ -111,7 +112,7 @@ class UserService
             $user = JWTAuth::user();
             $userModel           = User::find($user->id);
             if (!$userModel) {
-                $this->result->fail(ErrorCodeTable::CODE_NO_USER);
+                $this->result->fail(CodeTable::NO_USER);
                 break;
             };
             if (!$user->group_id) {
@@ -119,7 +120,7 @@ class UserService
                 $this->result->setData($user);
                 break;
             }
-    
+
             ///TODO
             // {
             //     "active": 1,
