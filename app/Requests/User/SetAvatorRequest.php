@@ -22,6 +22,5 @@ class SetAvatorRequest extends RequestValidate
     public function load()
     {
         $this->avatar   = $this->data['avatar'];
-        return true;
     }
 }

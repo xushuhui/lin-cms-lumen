@@ -45,15 +45,7 @@ class Response
         $this->message = $message;
     }
 
-    public function isFailed()
-    {
-        return $this->code !== CodeTable::OK;
-    }
 
-    public function isSucceed()
-    {
-        return $this->code === CodeTable::OK;
-    }
     public function toArray()
     {
         return [

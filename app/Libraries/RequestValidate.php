@@ -18,17 +18,18 @@ class RequestValidate extends Request
     public $rules;
     public $message;
     public $data;
-    public function __construct()
+    public $result;
+    public function __construct(Response $result)
     {
         parent::__construct();
         $this->data = json_decode($this->getContent(), true);
+        $this->result = $result;
     }
     public function validates()
     {
         $validator =  Validator::make($this->data, $this->rules);
         if ($validator->fails()) {
             $message = $validator->errors()->all();
-
             $this->message = is_array($message) ? implode(' ', $message) : $message;
             return false;
         }
@@ -36,14 +37,10 @@ class RequestValidate extends Request
     }
     public function getLastError()
     {
-        $result = new Response();
-        $result->setResult(CodeTable::INVALID_PARAMS, $this->message);
-        return $result->toArray();
+        return $this->result->setResult(CodeTable::INVALID_PARAMS, $this->message);
     }
     public function error()
     {
-        $result = new Response();
-        $result->fail(CodeTable::INVALID_PARAMS);
-        return $result->toArray();
+        return $this->result->fail(CodeTable::INVALID_PARAMS);
     }
 }

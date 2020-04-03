@@ -24,6 +24,5 @@ class ChangeUserPasswordRequest
         $this->newPassword   = $this->data['new_password'];
         $this->confirmPassword  = $this->data['confirm_password'];
         $this->id = $this->data['uid'];
-        return true;
     }
 }

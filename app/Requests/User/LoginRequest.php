@@ -25,7 +25,5 @@ class LoginRequest extends RequestValidate
     {
         $this->nickname   = $this->data['nickname'];
         $this->password  = $this->data['password'];
-        
-        return true;
     }
 }

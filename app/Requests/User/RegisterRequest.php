@@ -25,6 +25,5 @@ class RegisterRequest extends RequestValidate
         $this->nickname   = $this->data['nickname'];
         $this->password  = $this->data['password'];
         $this->email = $this->data['email'];
-        return true;
     }
 }

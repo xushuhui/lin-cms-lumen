@@ -8,20 +8,14 @@
  * 博客: https://www.phpst.cn
  */
 
-namespace App\Services;
+namespace App\Services\Impl;
 
-use App\Libraries\Response;
 use App\Requests\Admin\ChangeUserPasswordRequest;
 use App\Models\User;
 
-class AuthService
+class AuthServiceImpl
 {
-    public $result;
-
-    public function __construct()
-    {
-        $this->result = new Response();
-    }
+ 
     public function authority()
     {
         $arr = [
@@ -37,30 +31,18 @@ class AuthService
                 "查询日志记录的用户" => ["cms.log+get_users"],
             ],
         ];
-        $this->result->setData($arr);
-        return $this->result->toArray();
+        return $arr;
     }
     public function getAdminUsers()
     {
         $arr = [];
-        $this->result->setData($arr);
-        return $this->result->toArray();
+        return $arr;
     }
     public function changeUserPassword(ChangeUserPasswordRequest $request)
     {
-        do {
-            $userModel = User::find($request->id);
-            if (!$userModel) {
-                $this->result->fail(CodeTable::NO_USER);
-                break;
-            };
-            $userModel->password = $request->newPassword;
-            if (!$userModel->save()) {
-                $this->result->fail(CodeTable::SQL_ERROR);
-                break;
-            };
-            $this->result->succeed();
-        } while (false);
-        return $this->result->toArray();
+        $userModel = User::find($request->id);
+        $userModel->password = $request->newPassword;
+        return $userModel->save();
+       
     }
 }

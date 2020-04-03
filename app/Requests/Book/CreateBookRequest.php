@@ -30,6 +30,5 @@ class CreateBookRequest extends RequestValidate
         $this->author  = $this->data['author'];
         $this->summary = $this->data['summary'];
         $this->image   = $this->data['image'];
-        return true;
     }
 }

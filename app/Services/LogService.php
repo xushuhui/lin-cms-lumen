@@ -8,6 +8,6 @@
  */
 namespace App\Services;
 
-class LogService
+interface LogService
 {
 }
