@@ -8,7 +8,9 @@
  */
 namespace App\Requests\Admin;
 
-class ChangeUserPasswordRequest
+use App\Libraries\RequestValidate;
+
+class ChangeUserPasswordRequest extends RequestValidate
 {
     //{"new_password":"123456","confirm_password":"123456"}
     public $newPassword;

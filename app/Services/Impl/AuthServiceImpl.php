@@ -12,8 +12,9 @@ namespace App\Services\Impl;
 
 use App\Requests\Admin\ChangeUserPasswordRequest;
 use App\Models\User;
+use App\Services\AuthService;
 
-class AuthServiceImpl
+class AuthServiceImpl implements AuthService
 {
  
     public function authority()

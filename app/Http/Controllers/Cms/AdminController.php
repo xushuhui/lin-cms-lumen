@@ -16,9 +16,9 @@ use App\Requests\Admin\ChangeUserPasswordRequest;
 class AdminController
 {
     public $service;
-    public function __construct()
+    public function __construct(AuthService $service)
     {
-        $this->service = new AuthService();
+        $this->service =$service;
     }
     //查询所有可分配的权限
     public function authority()
