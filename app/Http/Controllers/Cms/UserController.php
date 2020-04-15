@@ -11,19 +11,19 @@ namespace App\Http\Controllers\Cms;
 
 use App\Http\Controllers\Controller;
 
-use App\Requests\User\LoginRequest;
+use App\Requests\LoginRequest;
 use App\Services\UserService;
 
 use Tymon\JWTAuth\Facades\JWTAuth;
-use App\Requests\User\RegisterRequest;
-use App\Requests\User\SetAvatorRequest;
+use App\Requests\RegisterRequest;
+use App\Requests\SetAvatorRequest;
 
 class UserController extends Controller
 {
     public $service;
-    public function __construct()
+    public function __construct(UserService $userService)
     {
-        $this->service = new UserService();
+        $this->service = $userService;
     }
     //注册
     public function register(RegisterRequest $request)

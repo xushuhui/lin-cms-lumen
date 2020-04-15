@@ -8,7 +8,7 @@
  */
 namespace App\Requests;
 
-use App\Libraries\RequestValidate;
+use App\Libs\RequestValidate;
 
 class RegisterRequest extends RequestValidate
 {

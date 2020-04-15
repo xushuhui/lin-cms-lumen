@@ -6,7 +6,7 @@
  * Email: xushuhui@qq.com
  * 博客: https://www.phpst.cn
  */
-$router->group(['prefix' => 'v1', 'namespace' => '\App\Http\Controllers\V1','middleware' => 'auth'], function () use ($router) {
+$router->group(['prefix' => 'api', 'namespace' => '\App\Http\Controllers\api','middleware' => 'auth'], function () use ($router) {
     $router->get('book/{id}', 'BookController@getBook');
     $router->get('books', 'BookController@getBooks');
     $router->post('book', 'BookController@createBook');

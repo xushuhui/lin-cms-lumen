@@ -9,9 +9,9 @@
 
 namespace App\Http\Controllers\Cms;
 
-use App\Requests\Admin\CreateGroupRequest;
+use App\Requests\CreateGroupRequest;
 use App\Services\AuthService;
-use App\Requests\Admin\ChangeUserPasswordRequest;
+use App\Requests\ChangeUserPasswordRequest;
 
 class AdminController
 {

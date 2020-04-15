@@ -8,7 +8,7 @@
  * 博客: https://www.phpst.cn
  */
 
-namespace App\Libraries;
+namespace App\Libs;
 
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
