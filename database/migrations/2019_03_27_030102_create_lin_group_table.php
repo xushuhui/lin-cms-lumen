@@ -20,9 +20,11 @@ class CreateLinGroupTable extends Migration
     public function up()
     {
         Schema::create('lin_group', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id();
             $table->string('name',60);
             $table->string('info',250);
+            $table->timestamps();
+            $table->softDeletes();
         });
     }
 

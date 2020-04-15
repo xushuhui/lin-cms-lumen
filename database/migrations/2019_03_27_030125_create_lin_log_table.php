@@ -20,7 +20,7 @@ class CreateLinLogTable extends Migration
     public function up()
     {
         Schema::create('lin_log', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id();
             $table->string('message',250);
             $table->integer('user_id');
             $table->string('user_name',20);

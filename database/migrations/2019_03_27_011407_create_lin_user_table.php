@@ -20,19 +20,17 @@ class CreateLinUserTable extends Migration
     public function up()
     {
         Schema::create('lin_user', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id();
             $table->string('nickname', 24);
+            $table->string('username', 24);
             $table->string('password', 60);
-            $table->smallInteger('super');
-            $table->smallInteger('active');
+            $table->tinyInteger('super')->default(1)->comment("是否为超级管理员 ; 1 -> 普通用户 | 2 -> 超级管理员");
+            $table->tinyInteger('active')->default(1);
             $table->integer('group_id');
             $table->string('email', 100);
             $table->string('avatar', 100);
-            $table->integer('created_at');
-            $table->integer('updated_at');
-            $table->integer('deleted_at');
-            //$table->timestamps();
-            //$table->softDeletes();
+            $table->timestamps();
+            $table->softDeletes();
         });
     }
 
