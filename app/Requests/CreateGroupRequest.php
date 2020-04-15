@@ -6,8 +6,8 @@
  * Email: xushuhui@qq.com
  * 博客: https://www.phpst.cn
  */
-namespace App\Requests\Admin;
+namespace App\Requests;
 
-class CreateGroupRequest
+class CreateGroupRequest 
 {
 }

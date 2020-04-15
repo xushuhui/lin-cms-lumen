@@ -6,24 +6,24 @@
  * Email: xushuhui@qq.com
  * 博客: https://www.phpst.cn
  */
-
-namespace App\Requests\User;
+namespace App\Requests;
 
 use App\Libraries\RequestValidate;
 
-class LoginRequest extends RequestValidate
+class RegisterRequest extends RequestValidate
 {
     public $nickname;
     public $password;
-   
+    public $email;
     public $rules = [
         'nickname'   => 'required|max:50',
         'password'  => 'required',
-        
+        'email' => 'required|email'
     ];
     public function load()
     {
         $this->nickname   = $this->data['nickname'];
         $this->password  = $this->data['password'];
+        $this->email = $this->data['email'];
     }
 }
