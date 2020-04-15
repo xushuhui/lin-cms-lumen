@@ -7,7 +7,7 @@
  * 博客: https://www.phpst.cn
  */
 
-namespace App\Http\Controllers\Cms;
+namespace App\Http\Controllers\cms;
 
 use App\Requests\CreateGroupRequest;
 use App\Services\AuthService;
@@ -23,24 +23,17 @@ class AdminController
     //查询所有可分配的权限
     public function authority()
     {
-        $result =  $this->service->authority();
-        return $result;
+        return $this->service->authority();
     }
     //查询所有用户
     public function getAdminUsers()
     {
-        $result =  $this->service->getAdminUsers();
-        return $result;
+        return $this->service->getAdminUsers();
     }
     //修改用户密码
     public function changeUserPassword(ChangeUserPasswordRequest $request)
     {
-        if ($request->validates() && $request->load()) {
-            $result =  $this->service->changeUserPassword($request);
-        } else {
-            $result =  $request->getLastError();
-        }
-        return $result;
+        return $this->service->changeUserPassword($request);;
     }
     //管理员更新用户信息
     public function deleteUser()
@@ -75,12 +68,8 @@ class AdminController
     //新建权限组
     public function createGroup(CreateGroupRequest $request)
     {
-        if ($request->validates() && $request->load()) {
-            $result =  $this->service->setAvatar($request);
-        } else {
-            $result =  $request->getLastError();
-        }
-        return $result;
+
+        return $this->service->setAvatar($request);
     }
     //更新权限组
     public function updateGroup()

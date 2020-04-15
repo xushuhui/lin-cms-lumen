@@ -11,12 +11,13 @@
 namespace App\Services\Impl;
 
 use App\Models\Book;
-use App\Requests\Book\CreateBookRequest;
-use App\Requests\Book\UpdateBookRequest;
+use App\Requests\CreateBookRequest;
+use App\Requests\UpdateBookRequest;
 use App\Services\BookService;
 
 class BookServiceImpl implements BookService
 {
+
     public function createBook(CreateBookRequest $request)
     {
         $model          = new Book();
@@ -39,7 +40,7 @@ class BookServiceImpl implements BookService
 
     public function delete($id)
     {
-        return $this->result->toArray();
+
     }
 
     public function getBook($id)

@@ -10,7 +10,10 @@
 
 namespace App\Services;
 
+use App\Requests\CreateBookRequest;
+
 interface BookService
 {
-    public function createBook();
+    public function createBook(CreateBookRequest $request);
+    public function getBooks();
 }

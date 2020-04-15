@@ -10,11 +10,11 @@
 
 namespace App\Services\Impl;
 
-use App\Requests\User\LoginRequest;
+use App\Requests\LoginRequest;
 use Tymon\JWTAuth\Facades\JWTAuth;
-use App\Requests\User\RegisterRequest;
+use App\Requests\RegisterRequest;
 use App\Models\User;
-use App\Requests\User\SetAvatorRequest;
+use App\Requests\SetAvatorRequest;
 use Illuminate\Support\Facades\Hash;
 use App\Events\LoggerEvent;
 use App\Services\UserService;

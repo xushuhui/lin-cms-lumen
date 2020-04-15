@@ -7,7 +7,7 @@
  * 博客: https://www.phpst.cn
  */
 
-namespace App\Http\Controllers\Cms;
+namespace App\Http\Controllers\cms;
 
 class LogController
 {

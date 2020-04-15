@@ -6,7 +6,7 @@
  * Email: xushuhui@qq.com
  * 博客: https://www.phpst.cn
  */
-$router->group(['prefix' => 'cms','namespace' => '\App\Http\Controllers\Cms'], function () use ($router) {
+$router->group(['prefix' => 'cms','namespace' => '\App\Http\Controllers\cms'], function () use ($router) {
     // 账户相关接口分组
     $router->group(['prefix' =>'user'], function () use ($router) { 
          // 登陆接口
