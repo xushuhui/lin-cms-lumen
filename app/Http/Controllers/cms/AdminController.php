@@ -33,7 +33,7 @@ class AdminController
     //修改用户密码
     public function changeUserPassword(ChangeUserPasswordRequest $request)
     {
-        return $this->service->changeUserPassword($request);;
+        return $this->service->changeUserPassword($request);
     }
     //管理员更新用户信息
     public function deleteUser()
@@ -87,7 +87,7 @@ class AdminController
         # code...
     }
     //分配多个权限
-    public function dispatchAuths(Type $var = null)
+    public function dispatchAuths()
     {
         # code...
     }

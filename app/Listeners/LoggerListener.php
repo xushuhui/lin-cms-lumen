@@ -28,12 +28,12 @@ class LoggerListener
     /**
      * Handle the event.
      *
-     * @param  ExampleEvent  $event
+     * @param LoggerEvent $event
+     * @param Log $logModel
      * @return void
      */
-    public function handle(LoggerEvent $event)
+    public function handle(LoggerEvent $event, Log $logModel)
     {
-        $logModel = new Log();
         $logModel->message = $event->data['message'];
         $logModel->user_name = $event->data['nickname'];
         $logModel->user_id = $event->data['user_id'];

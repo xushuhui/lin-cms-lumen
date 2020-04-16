@@ -10,7 +10,7 @@
 
 namespace App\Services;
 
-use App\Requests\Admin\ChangeUserPasswordRequest;
+use App\Requests\ChangeUserPasswordRequest;
 
 interface AuthService
 {

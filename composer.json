@@ -6,9 +6,10 @@
     "type": "project",
     "require": {
         "php": "^7.2.5",
+        "ext-json": "*",
+        "illuminate/redis": "^7.6",
         "laravel/lumen-framework": "^7.0",
-        "tymon/jwt-auth": "^1.0",
-      "ext-json": "*"
+        "tymon/jwt-auth": "^1.0"
     },
     "require-dev": {
         "fzaninotto/faker": "^1.9.1",

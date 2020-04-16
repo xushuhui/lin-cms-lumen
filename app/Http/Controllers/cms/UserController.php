@@ -17,6 +17,7 @@ use App\Services\UserService;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use App\Requests\RegisterRequest;
 use App\Requests\SetAvatorRequest;
+use Tymon\JWTAuth\JWT;
 
 class UserController extends Controller
 {
@@ -28,33 +29,20 @@ class UserController extends Controller
     //注册
     public function register(RegisterRequest $request)
     {
-        if ($request->validates() && $request->load()) {
-            $result =  $this->service->register($request);
-        } else {
-            $result =  $request->getLastError();
-        }
-        return $result;
+
+        return $this->service->register($request);;
     }
 
     //登录
     public function login(LoginRequest $request)
     {
-        if ($request->validates() && $request->load()) {
-            $result =  $this->service->login($request);
-        } else {
-            $result =  $request->getLastError();
-        }
-        return $result;
+
+        return $this->service->login($request);;
     }
     //设置头像
     public function setAvatar(SetAvatorRequest $request)
     {
-        if ($request->validates() && $request->load()) {
-            $result =  $this->service->setAvatar($request);
-        } else {
-            $result =  $request->getLastError();
-        }
-        return $result;
+        return $this->service->setAvatar($request);
     }
    
 
@@ -74,8 +62,7 @@ class UserController extends Controller
     //查询自己信息
     public function getInformation()
     {
-        $result =  $this->service->getInfo();
-        return $result;
+        return $this->service->getInfo();
     }
 
     //刷新令牌
@@ -86,15 +73,13 @@ class UserController extends Controller
     */
     public function refresh()
     {
-        $result =  $this->service->refreshToken();
-        return $result;
+        return $this->service->refreshToken();
     }
 
     //查询自己拥有的权限 验证token
     public function auths()
     {
-        $result =  $this->service->getAuths();
-        return $result;
+        return $this->service->getAuths();
     }
     /**
     * 注销，把所给token加入黑名单
@@ -104,6 +89,7 @@ class UserController extends Controller
     public function deleteToken()
     {
         JWTAuth::parseToken()->invalidate();
+
         return response()->json(['message' => 'Successfully logged out']);
     }
     /**
