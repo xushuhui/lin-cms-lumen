@@ -4,7 +4,7 @@
  * Author: xushuhui
  * 微信公众号: 互联网工程师
  * Email: xushuhui@qq.com
- * 博客: https://www.phpst.cn
+ * 博客: https://blog.phpst.cn
  */
 namespace App\Models;
 
@@ -58,10 +58,10 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     }
     public function getUserByEmail($email)
     {
-        return $this->where("email", $email)->get();
+        return $this->where("email", $email)->first();
     }
     public function getUserByNickName($nickname)
     {
-        return $this->where("nickname", $nickname)->get();
+        return $this->where("nickname", $nickname)->first();
     }
 }

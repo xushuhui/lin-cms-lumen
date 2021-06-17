@@ -5,7 +5,7 @@
  * Author: xushuhui
  * 微信公众号: 互联网工程师
  * Email: xushuhui@qq.com
- * 博客: https://www.phpst.cn
+ * 博客: https://blog.phpst.cn
  */
 
 namespace App\Services\Impl;
@@ -14,14 +14,19 @@ use App\Requests\LoginRequest;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use App\Requests\RegisterRequest;
 use App\Models\User;
-use App\Requests\SetAvatorRequest;
+use App\Requests\SetAvatarRequest;
 use Illuminate\Support\Facades\Hash;
 use App\Events\LoggerEvent;
+use App\Libs\CodeTable;
+use App\Libs\Response;
 use App\Services\UserService;
 
 class UserServiceImpl implements UserService
 {
-
+    public $response;
+    public function __construct(Response $response) {
+        $this->response = $response;
+    }
     public function getCurrentUser()
     {
         return JWTAuth::user();
@@ -39,22 +44,31 @@ class UserServiceImpl implements UserService
     }
     public function register(RegisterRequest $request)
     {
+        
         $userModel           = new User();
         $user = $userModel->getUserByEmail($request->email);
+      
         if ($user) {
+            return $this->response->fail(CodeTable::USER_EXIST);
         }
-
+        
         $user = $userModel->getUserByNickName($request->nickname);
         if ($user) {
+            return $this->response->fail(CodeTable::USER_EXIST);
         }
+        
         $userModel->nickname = $request->nickname;
         $userModel->password = Hash::make($request->password);
         $userModel->email = $request->email;
-
-        return $userModel->save();
+        $userModel->username = $request->username;
+        $userModel->group_id = $request->groupId;
+        $userModel->avatar = $request->avatar;
+        $userModel->save();
+       
+        return $this->response->succeed();
     }
     //设置头像
-    public function setAvatar(SetAvatorRequest $request)
+    public function setAvatar(SetAvatarRequest $request)
     {
         $userId = JWTAuth::user()->id;
         $userModel           = User::find($userId);

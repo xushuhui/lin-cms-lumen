@@ -5,7 +5,7 @@
  * Author: xushuhui
  * 微信公众号: 互联网工程师
  * Email: xushuhui@qq.com
- * 博客: https://www.phpst.cn
+ * 博客: https://blog.phpst.cn
  */
 
 namespace App\Libs;
@@ -18,12 +18,14 @@ class Response
 
     public function fail($code)
     {
-        self::setCode($code);
+       $this->setCode($code);
+       return $this;
     }
 
     public function succeed()
     {
-        self::setCode(CodeTable::OK);
+        $this->setCode(CodeTable::OK);
+        return $this;
     }
 
     public function setCode($code)
@@ -34,6 +36,7 @@ class Response
     public function setData($data)
     {
         $this->data = $data;
+        return $this;
     }
     public function getData()
     {
@@ -43,6 +46,7 @@ class Response
     {
         $this->code = $code;
         $this->message = $message;
+        return $this;
     }
 
 

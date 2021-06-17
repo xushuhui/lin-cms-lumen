@@ -4,44 +4,59 @@
  * Author: xushuhui
  * 微信公众号: 互联网工程师
  * Email: xushuhui@qq.com
- * 博客: https://www.phpst.cn
+ * 博客: https://blog.phpst.cn
  */
 
 namespace App\Http\Controllers\cms;
 
 use App\Http\Controllers\Controller;
-
+use App\Libs\Response;
 use App\Requests\LoginRequest;
 use App\Services\UserService;
 
 use Tymon\JWTAuth\Facades\JWTAuth;
 use App\Requests\RegisterRequest;
-use App\Requests\SetAvatorRequest;
+use App\Requests\SetAvatarRequest;
 use Tymon\JWTAuth\JWT;
 
 class UserController extends Controller
 {
     public $service;
-    public function __construct(UserService $userService)
+    public $response;
+    public function __construct(UserService $userService,Response $response)
     {
         $this->service = $userService;
+        $this->response = $response;
     }
     //注册
     public function register(RegisterRequest $request)
     {
-
-        return $this->service->register($request);;
+        if (!$request->validate()){
+            return $request->getLastError();
+        };
+        $request->load();
+         $res= $this->service->register($request);
+        return $res->toArray();
+       
     }
 
     //登录
     public function login(LoginRequest $request)
     {
-
-        return $this->service->login($request);;
+        if (!$request->validate()){
+            return $request->getLastError();
+        };
+        $request->load();
+        $data = $this->service->login($request);
+        return $this->response->setData($data);
     }
     //设置头像
-    public function setAvatar(SetAvatorRequest $request)
+    public function setAvatar(SetAvatarRequest $request)
     {
+        if (!$request->validate()){
+            return $request->getLastError();
+        };
+        $request->load();
         return $this->service->setAvatar($request);
     }
    

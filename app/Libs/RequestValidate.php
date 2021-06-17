@@ -5,7 +5,7 @@
  * Author: xushuhui
  * 微信公众号: 互联网工程师
  * Email: xushuhui@qq.com
- * 博客: https://www.phpst.cn
+ * 博客: https://blog.phpst.cn
  */
 
 namespace App\Libs;
@@ -19,13 +19,13 @@ class RequestValidate extends Request
     public $message;
     public $data;
     public $result;
-    public function __construct(Response $result)
+    public function __construct()
     {
         parent::__construct();
         $this->data = json_decode($this->getContent(), true);
-        $this->result = $result;
+        $this->result = new Response();
     }
-    public function validates()
+    public function validate()
     {
         $validator =  Validator::make($this->data, $this->rules);
         if ($validator->fails()) {
